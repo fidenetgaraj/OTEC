@@ -322,7 +322,7 @@ def sendCmd(cmd, param = ""):
             
         
         elif "CMGL" in resp:
-            """AT+CMGL="REC UNREAD"\r\r\n+CMGL: 11,"REC UNREAD","+905056783615","","2022/12/25 01:37:40+12"\r\nMerhaba \r\n\r\nOK\r\n"""
+            """AT+CMGL="REC UNREAD"\r\r\n+CMGL: 11,"REC UNREAD","+9050xxxxxxx","","2022/12/25 01:37:40+12"\r\nMerhaba \r\n\r\nOK\r\n"""
             smsContainer = resp.split("\r\n")
             if len(smsContainer) > 3:
                 owner = smsContainer[1].split(",")[2].strip('"')
@@ -397,13 +397,13 @@ def sendCmd(cmd, param = ""):
                         np[order] = (r,g,b)
                         np.write()
                     elif "loc" in smsBody.lower():
-                        #https://www.google.com/maps/@37.4603776,30.5856512,15z
-                        # 3727.2303,N,03034.9980,E
+                        #https://www.google.com/maps/@37.xxxxx,30.xxxxxx,15z
+                        # 37xxxxx,N,03034xxxxx,E
                         #gpsData = [latitude, latitudePole, longitude, longitudePole, speedAsKnots, speedAsKm, cog, timeData]
                         #timeData = [year, month, day, clck, mnts, scnds]
-                        latitude = gpsData[0] #"3727.2303"
+                        latitude = gpsData[0] #"37xxxxx
                         latitudePole = gpsData[1] #"N"
-                        longitude  = gpsData[2] #"03034.9980"
+                        longitude  = gpsData[2] #"030xxxxx0"
                         longitudePole = gpsData[3] #"E"
                         
                         link = "https://www.google.com.tr/maps/place/{}{}+{}{}"
@@ -473,7 +473,7 @@ def sendSMS(num,text):
     info(text, "smsGonder")
 
 """
-b'$GPGGA,095731.000,3727.2303,N,03034.9980,E'b',2,8,1.11,814.2,M,36.2,M,,*58\r\n
+b'$GPGGA,095731.000,37xx.xxxx,N,030xx.xxxxx,E'b',2,8,1.11,814.2,M,36.2,M,,*58\r\n
 $GNGSA,A,3,07,13,05,14,20,,,,,,,,1.41,1.11,0.87,1*0C\r\n
 $GNGSA,'b'A,3,78,68,66,,,,,,,,,,1.41,1.11,0.87,2*09\r\n
 $GPGSV,3,1,10,30,71,354,,14,61,177,16,07,45,053,1'b'8,20,44,247,41,0*6A\r\n
@@ -564,7 +564,7 @@ def getGPSSentence():
             gpsContainer = resp.split("\r\n")
             info(gpsContainer, "GPS")
             for i in gpsContainer:
-                #$GNRMC,095731.000,A,3727.2303,N,03034.9980,E,0.00,193.26,241222'b',,,D,V*03\r\n
+                #$GNRMC,095731.000,A,37xx.xxxx,N,030xx.xxxx,E,0.00,193.26,241222'b',,,D,V*03\r\n
                 if (("$GPRMC" in i ) or ("$GNRMC" in i )) and (len(i) > 70):
                     gprmcContainer = i.split(",")
                     if gprmcContainer[2] == "A":
