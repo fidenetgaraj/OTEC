@@ -1,1 +1,1 @@
-tracking=off;destIP=188.119.45.137;destPort=5000;smsA=off;smsB=off;smsC=off;
+tracking=off;destIP=188.xxx.xx.xxx;destPort=5xxx;smsA=off;smsB=off;smsC=off;
